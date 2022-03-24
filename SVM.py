@@ -3,8 +3,12 @@ import streamlit as st
 import pandas as pd
 import re
 import numpy as np
+import nltk
+nltk.download('stopwords')
+nltk.download('punkt')
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
+
 
 st.title("Judul: Uji Akurasi Klasifikasi Pada Lirik Lagu Berbahasa Indonesia")
 st.text("Parameter default SVM : gamma=scale dan C=1.0")
