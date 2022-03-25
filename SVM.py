@@ -3,6 +3,8 @@ import streamlit as st
 import pandas as pd
 import re
 import numpy as np
+nltk.download('stopwords')
+nltk.download('punkt')
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
