@@ -1,3 +1,4 @@
-wordnet
-reuters
 stopwords
+tokenizer
+classify
+downloader
