@@ -9,20 +9,42 @@ nltk.download('punkt')
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
+# sidebar
+with st.sidebar:
+    st.header('Pilih Jenis Dataset')
+    radio = st.radio(
+        "",
+        ('Perbaris', 'Perbait', 'Keseluruhan Lagu'))
+    if radio == 'Perbaris':
+        st.text("Anda Memilih Perbaris")
+    elif radio == 'Perbait':
+        st.text("Anda Memilih Perbait")
+    else:
+        st.text("Anda Memilih Keseluruhan Lagu")
 st.title("Judul: Uji Akurasi Klasifikasi Pada Lirik Lagu Berbahasa Indonesia")
-st.text("Parameter default SVM : gamma=scale dan C=1.0")
-st.text("Hyperparameter PSO : gamma=2.05302752 dan C=7.35185408")
-
-name = st.text_input("Masukkan lirik lagu:")
-chkbx = st.checkbox('Gunakan Tuning Hyperparameter PSO')
-if chkbx:
+if radio == 'Perbaris':
+    st.text("Parameter default SVM : gamma=scale dan C=1.0")
+    st.text("Hyperparameter PSO : gamma=2.5916517 dan C=3.16802062")
+    st.header("Masukkan lirik lagu perbaris:")
+    name = st.text_input(" ")
     teks = name.title()
-    model = joblib.load(open('svm-pso_joblibs.pkl', 'rb'))
-    tfidf = joblib.load(open('tfidf-pso_joblibs.pkl', 'rb'))
+    model = joblib.load(open('model-2.pkl', 'rb'))
+    tfidf = joblib.load(open('tfidf-perbaris.pkl', 'rb'))
+elif radio == 'Perbait':
+    st.text("Parameter default SVM : gamma=scale dan C=1.0")
+    st.text("Hyperparameter PSO : gamma=1.29886922 dan C=7.84779504")
+    st.header("Masukkan lirik lagu perbait:")
+    name = st.text_input(" ")
+    teks = name.title()
+    model = joblib.load(open('model-4.pkl', 'rb'))
+    tfidf = joblib.load(open('tf-idf-perbait.pkl', 'rb'))
 else:
+    st.text("Parameter default SVM : gamma=default dan C=default")
+    st.header("Masukkan lirik keseluruhan lagu:")
+    name = st.text_input(" ")
     teks = name.title()
-    model = joblib.load(open('svm_joblib.pkl', 'rb'))
-    tfidf = joblib.load(open('tfidf_joblib.pkl', 'rb'))
+    model = joblib.load(open('model-5.pkl', 'rb'))
+    tfidf = joblib.load(open('tfidf-keseluruhan-lagu.pkl', 'rb'))
 
 def preprocessing(lirik):
     lirik = data_cleaning(lirik)
